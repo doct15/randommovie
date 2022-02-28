@@ -15,7 +15,7 @@ show_movies () {
 
 for((i=1;i<=$numberofmounts;i+=1))
 do
-  files+=($(ls -RA1 /mnt/movies$i/Movies | grep -i '\.mkv\|\.mp4\|\.avi'))
+  files+=($(ls -RA1 /mnt/movies$i/Movies | grep -i '\.mkv\|\.mp4\|\.avi\|\.m4v'))
   eval $(eval echo "mount[{$prevmount..${#files[@]}}]=$i;")
   prevmount=$((${#files[@]} + 1))
 done
