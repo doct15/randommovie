@@ -21,6 +21,8 @@ do
 done
 
 clear
+echo "Total Movies ${#files[@]}"
+echo ""
 show_movies
 
 while :
