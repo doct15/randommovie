@@ -11,7 +11,6 @@ prevmount=0
 show_movies () {
   movie=$(($RANDOM % ${#files[@]}+1))
   echo "/mnt/movies${mount[$movie]}/Movies/${files[$movie]}"
-  #echo "Mnt: ${mount[$movie]} - Movie: ${files[$movie]}"
 }
 
 for((i=1;i<=$numberofmounts;i+=1))
