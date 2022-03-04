@@ -4,25 +4,21 @@
 SAVEIFS=$IFS
 IFS=$'\n'
 files=()
-mount=()
 numberofmounts=2
-prevmount=0
 
 show_movies () {
   movie=$(($RANDOM % ${#files[@]}+1))
-  echo "/mnt/movies${mount[$movie]}/Movies/${files[$movie]}"
+  echo "${files[$movie]}"
 }
 
 for((i=1;i<=$numberofmounts;i+=1))
 do
-  files+=($(ls -RA1 /mnt/movies$i/Movies | grep -i '\.mkv\|\.mp4\|\.avi\|\.m4v'))
-  eval $(eval echo "mount[{$prevmount..${#files[@]}}]=$i;")
-  prevmount=$((${#files[@]} + 1))
+  files+=($(find /mnt/movies$i/Movies/ -type f -name "*.mkv" -o -name "*.mp4" -o -name "*.avi" -o -name "*.m4v"))
 done
 
 clear
 echo "Total Movies ${#files[@]}"
-echo ""
+echo "---"
 show_movies
 
 while :
