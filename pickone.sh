@@ -5,18 +5,24 @@ SAVEIFS=$IFS
 IFS=$'\n'
 files=()
 numberofmounts=2
+declare -a mounts=("g" "f")
+#declare -a mounts=("movies1" "movies2")
 
 show_movies () {
   movie=$(($RANDOM % ${#files[@]}+1))
   echo "${files[$movie]}"
 }
 
-for((i=1;i<=$numberofmounts;i+=1))
+#for((i=1;i<=$numberofmounts;i+=1))
+for i in "${mounts[@]}"
 do
-  files+=($(find /mnt/movies$i/Movies/ -type f -name "*.mkv" -o -name "*.mp4" -o -name "*.avi" -o -name "*.m4v"))
+  #echo "$(ls /mnt/$i/Movies/)"
+  echo "ls /mnt/$i/Movies/"
+  #files+=($(find /mnt/movies$i/Movies/ -type f -name "*.mkv" -o -name "*.mp4" -o -name "*.avi" -o -name "*.m4v"))
+  files+=($(find /mnt/$i/Movies/ -type f -name "*.mkv" -o -name "*.mp4" -o -name "*.avi" -o -name "*.m4v"))
 done
 
-clear
+#clear
 echo "Total Movies ${#files[@]}"
 echo "---"
 show_movies
